@@ -14,6 +14,7 @@
         align-items: center;
         justify-content: center;
         font-size: 17vw;
+        transition: 1s;
       }
       .meadow{
         position: absolute;
@@ -32,22 +33,58 @@
         border: none;
         outline: none;
         font-family: "times";
+        font-weight: 900;
 
       }
       .castle{
         position: absolute;
-        top: 40%;
+        top: 20%;
         left: 25%;
-        width: 50%;
+        width: 30%;
+        opacity: 0;
+        transition: 1s;
+        transform: scaleY(.8);
+      }
+      .castle.active{
+        transform: scaleY(1);
+        opacity: 1;
+      }
+      .dollar-sign{
+        position: absolute;
+        top: 35%;
+        left: 7%;
+        width: 24%;
+        opacity: 0;
+        transition: 1s;
+      }
+      .chest{
+        position: absolute;
+        top: 37%;
+        left: 68%;
+        width: 25%;
+        opacity: 0;
+        transition: 1s;
       }
     </style>
   </head>
   <body>
     <div class="images">
       <img src="http://christchurchfulham.com/wp-content/uploads/2013/12/Kids_flyer_background.jpg" class="meadow">
-      <img src="http://kit8.net/images/detailed/1/Castle_flat_vector_illustration.png?t=1441290093" class="castle">
+      <img src="images/castle.gif" class="castle">
+      <img src="images/dollar-sign.png" class="dollar-sign">
+      <img src="images/treasure-chest.png" class="chest">
     </div>
     <h1 class="title">Time Waster</h1>
     <button class="button">play</button>
+
+    <script>
+      document.querySelector("button").addEventListener("click",function(){
+        document.querySelector(".castle").classList.add("active")
+        document.querySelector(".chest").style.opacity=1
+        document.querySelector(".dollar-sign").style.opacity=1
+        document.querySelector(".button").style.opacity=0
+        document.querySelector(".title").style.opacity=0
+      })
+    </script>
   </body>
 </html>
