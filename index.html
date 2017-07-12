@@ -42,12 +42,14 @@
         left: 25%;
         width: 30%;
         opacity: 0;
+        visibility: hidden;
         transition: 1s;
         transform: scaleY(.8);
       }
       .castle.active{
         transform: scaleY(1);
         opacity: 1;
+        visibility: visible;
       }
       .dollar-sign{
         position: absolute;
@@ -55,6 +57,7 @@
         left: 7%;
         width: 24%;
         opacity: 0;
+        visibility: hidden;
         transition: 1s;
       }
       .chest{
@@ -63,27 +66,83 @@
         left: 68%;
         width: 25%;
         opacity: 0;
+        visibility: hidden;
         transition: 1s;
+      }
+      .coin{
+        position: absolute;
+        top: 37%;
+        left: 77%;
+        width: 5%;
+        opacity: 0;
+        visibility: hidden;
+        transition: .6s cubic-bezier(0, 0, 0.09, 1.32);
+      }
+      .bag{
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        top: 0%;
+        left: 50%;
+        width: 5%;
+      }
+      .score{
+        position: absolute;
+        top: 0%;
+        left: 57%;
+        opacity: 0;
+        visibility: hidden;
+      }
+      .active{
+        visibility: visible;
+        opacity: 1;
+      }
+      .inactive{
+        visibility: hidden;
+        opacity: 0;
       }
     </style>
   </head>
   <body>
     <div class="images">
       <img src="http://christchurchfulham.com/wp-content/uploads/2013/12/Kids_flyer_background.jpg" class="meadow">
-      <img src="images/castle.gif" class="castle">
+      <img src="images/castle1.gif" class="castle">
       <img src="images/dollar-sign.png" class="dollar-sign">
+      <img src="images/coin.gif" class="coin">
       <img src="images/treasure-chest.png" class="chest">
+      <img src="images/bag.png" class="bag">
     </div>
+    <h2 class="score">0</h2>
     <h1 class="title">Time Waster</h1>
     <button class="button">play</button>
-
     <script>
+      var score=0
+      document.querySelector(".chest").addEventListener("click",function(){
+        var coin=document.querySelector(".coin")
+        console.log(coin.classList)
+        var cloin = coin.cloneNode(true);
+        cloin = document.body.appendChild(cloin)
+        setTimeout(function(){
+          cloin.classList.add("active")
+          cloin.style.transform = "translate3d(" + (Math.random()*400-200) + "%," + (Math.random()*-400-100) + "%,0)"
+          console.log(Math.random()*400-200)
+        },100)
+        setTimeout(function(){
+          cloin.style.opacity = 0;
+        },1000)
+        score=score+1
+        document.querySelector(".score").innerHTML=score
+
+      })
       document.querySelector("button").addEventListener("click",function(){
         document.querySelector(".castle").classList.add("active")
-        document.querySelector(".chest").style.opacity=1
-        document.querySelector(".dollar-sign").style.opacity=1
-        document.querySelector(".button").style.opacity=0
-        document.querySelector(".title").style.opacity=0
+        document.querySelector(".chest").classList.add("active")
+        document.querySelector(".dollar-sign").classList.add("active")
+        document.querySelector(".bag").classList.add("active")
+        document.querySelector(".score").classList.add("active")
+
+        document.querySelector(".button").classList.add("inactive")
+        document.querySelector(".title").classList.add("inactive")
       })
     </script>
   </body>
