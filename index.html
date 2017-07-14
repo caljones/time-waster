@@ -58,7 +58,6 @@
         width: 24%;
         opacity: 0;
         visibility: hidden;
-        transition: 1s;
       }
       .chest{
         position: absolute;
@@ -117,6 +116,7 @@
     <button class="button">play</button>
     <script>
       var score=0
+      var level=1
       document.querySelector(".chest").addEventListener("click",function(){
         var coin=document.querySelector(".coin")
         console.log(coin.classList)
@@ -130,20 +130,38 @@
         setTimeout(function(){
           cloin.style.opacity = 0;
         },1000)
-        score=score+1
-        document.querySelector(".score").innerHTML=score
-
+        increaseScore(1)
+      })
+      document.querySelector(".dollar-sign").addEventListener("click",function(){
+        decreaseScore(25)
+        document.querySelector(".castle").src = "images/castle2.gif"
       })
       document.querySelector("button").addEventListener("click",function(){
         document.querySelector(".castle").classList.add("active")
         document.querySelector(".chest").classList.add("active")
-        document.querySelector(".dollar-sign").classList.add("active")
         document.querySelector(".bag").classList.add("active")
         document.querySelector(".score").classList.add("active")
 
         document.querySelector(".button").classList.add("inactive")
         document.querySelector(".title").classList.add("inactive")
       })
+      document.querySelector(".bag").addEventListener("click",function(){
+        increaseScore(25)
+      })
+      function increaseScore(points){
+        score=score+points
+        document.querySelector(".score").innerHTML=score
+        if(score==25){
+          // upgrade coin fades in
+          document.querySelector(".dollar-sign").classList.add("active")
+        }
+      }
+      function decreaseScore(points){
+        score=score-points
+         document.querySelector(".score").innerHTML=score
+          // upgrade coin fades out
+          document.querySelector(".dollar-sign").classList.remove("active")
+        }
     </script>
   </body>
 </html>
